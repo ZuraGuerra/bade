@@ -24,6 +24,30 @@ defmodule Bade.Templates.Buttons do
     }
   end
 
+  @doc """
+  Generates a postback button template and encodes it to json.
+  'title' has a character limit of 20.
+  'payload' has a character limit of 1000.
+  Check the FB docs: https://developers.facebook.com/docs/messenger-platform/send-api-reference/postback-button
+  """
+  def postback!(title, payload), do: postback(title, payload) |> Poison.encode!
+
+  @doc """
+  Generates a postback button template. Use it with a bang ('postback!/2') to receive a json.
+  'title' has a character limit of 20.
+  'payload' has a character limit of 1000.
+  Check the FB docs: https://developers.facebook.com/docs/messenger-platform/send-api-reference/postback-button
+  """
+  def postback(title, payload) do
+    %{
+      "type" => "postback",
+      "title" => title,
+      "payload" => payload
+    }
+  end
+
+  ######## PRIVATE FUNCTIONS ########
+
   defp assign_fallback_url(url, :empty), do: url
   defp assign_fallback_url(url, fallback_url), do: fallback_url
 end
