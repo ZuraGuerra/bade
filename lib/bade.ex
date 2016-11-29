@@ -1,0 +1,2 @@
+defmodule Bade do
+end
