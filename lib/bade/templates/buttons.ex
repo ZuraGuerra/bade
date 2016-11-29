@@ -58,11 +58,24 @@ defmodule Bade.Templates.Buttons do
   """
   def call(title, payload), do: generic("phone_number", title, payload)
 
+  @doc """
+  Generates a share button template and encodes it to json.
+  Check the FB docs: https://developers.facebook.com/docs/messenger-platform/send-api-reference/share-button
+  """
+  def share!, do: generic("element_share") |> Poison.encode!
+
+  @doc """
+  Generates a share button template. Use it with a bang ('share!/0') to receive a json.
+  Check the FB docs: https://developers.facebook.com/docs/messenger-platform/send-api-reference/share-button
+  """
+  def share, do: generic("element_share")
+
   ######## PRIVATE FUNCTIONS ########
 
   defp assign_fallback_url(url, :empty), do: url
   defp assign_fallback_url(url, fallback_url), do: fallback_url
 
+  defp generic(type), do: %{"type" => type}
   defp generic(type, title, payload) do
     %{
       "type" => type,
