@@ -109,6 +109,18 @@ defmodule Bade.Templates.Buttons do
   """
   def log_in(url), do: %{"type" => "account_link", "url" => url}
 
+  @doc """
+  Generates a log out button template and encodes it to json.
+  Check the FB docs: https://developers.facebook.com/docs/messenger-platform/account-linking/unlink-account
+  """
+  def log_out!, do: log_out |> Poison.encode!
+
+  @doc """
+  Generates a log out button template. Use it with a bang ('log_out/0') to receive a json.
+  Check the FB docs: https://developers.facebook.com/docs/messenger-platform/account-linking/unlink-account
+  """
+  def log_out, do: %{"type" => "account_unlink"}
+
   ######## PRIVATE FUNCTIONS ########
 
   defp assign_fallback_url(url, :empty), do: url
