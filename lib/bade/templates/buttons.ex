@@ -38,16 +38,36 @@ defmodule Bade.Templates.Buttons do
   'payload' has a character limit of 1000.
   Check the FB docs: https://developers.facebook.com/docs/messenger-platform/send-api-reference/postback-button
   """
-  def postback(title, payload) do
-    %{
-      "type" => "postback",
-      "title" => title,
-      "payload" => payload
-    }
-  end
+  def postback(title, payload), do: generic("postback", title, payload)
+
+  @doc """
+  Generates a call button template and encodes it to json.
+  'title' has a character limit of 20.
+  'payload' has a character limit of 1000 and must have "+" prefix
+  followed by the country code, area code and local number.
+  Check the FB docs: https://developers.facebook.com/docs/messenger-platform/send-api-reference/call-button
+  """
+  def call!(title, payload), do: generic("phone_number", title, payload) |> Poison.encode!
+
+  @doc """
+  Generates a call button template. Use it with a bang ('call!/2') to receive a json.
+  'title' has a character limit of 20.
+  'payload' has a character limit of 1000 and must have "+" prefix
+  followed by the country code, area code and local number.
+  Check the FB docs: https://developers.facebook.com/docs/messenger-platform/send-api-reference/call-button
+  """
+  def call(title, payload), do: generic("phone_number", title, payload)
 
   ######## PRIVATE FUNCTIONS ########
 
   defp assign_fallback_url(url, :empty), do: url
   defp assign_fallback_url(url, fallback_url), do: fallback_url
+
+  defp generic(type, title, payload) do
+    %{
+      "type" => type,
+      "title" => title,
+      "payload" => payload
+    }
+  end
 end
