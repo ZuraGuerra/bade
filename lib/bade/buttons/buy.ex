@@ -1,4 +1,4 @@
-defmodule Bade.Templates.Services.Buy do
+defmodule Bade.Buttons.Buy do
   @doc """
   Generates a 'payment_summary' map, needed to create a buy button template.
   'payment_type' must be either "FIXED_AMOUNT" or "FLEXIBLE AMOUNT".

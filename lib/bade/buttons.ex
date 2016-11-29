@@ -1,4 +1,4 @@
-defmodule Bade.Templates.Buttons do
+defmodule Bade.Buttons do
   @doc """
   Generates an url button template as a map and encodes it to json.
   Check the FB docs: https://developers.facebook.com/docs/messenger-platform/send-api-reference/url-button
@@ -82,7 +82,7 @@ defmodule Bade.Templates.Buttons do
   @doc """
   Generates a buy button template. Use it with a bang ('buy!/2') to receive a json.
   You can generate the required fields 'payment_summary' and 'price_list' using
-  'Bade.Templates.Services.Buy.payment_summary/6' and 'Bade.Templates.Services.Buy.price_list/2';
+  'Bade.Buttons.Buy.payment_summary/6' and 'Bade.Buttons.Buy.price_list/2';
   read their docs for more details.
   Check the FB docs: https://developers.facebook.com/docs/messenger-platform/send-api-reference/buy-button
   """
