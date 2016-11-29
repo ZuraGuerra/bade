@@ -119,7 +119,7 @@ defmodule Bade.Buttons do
   Generates a log out button template. Use it with a bang ('log_out/0') to receive a json.
   Check the FB docs: https://developers.facebook.com/docs/messenger-platform/account-linking/unlink-account
   """
-  def log_out, do: %{"type" => "account_unlink"}
+  def log_out, do: generic("account_unlink")
 
   ######## PRIVATE FUNCTIONS ########
 
