@@ -95,6 +95,20 @@ defmodule Bade.Templates.Buttons do
     }
   end
 
+  @doc """
+  Generates a log in button template and encodes it to json.
+  'url' must be using https.
+  Check the FB docs: https://developers.facebook.com/docs/messenger-platform/account-linking/link-account
+  """
+  def log_in!(url), do: log_in(url) |> Poison.encode!
+
+  @doc """
+  Generates a log in button template. Use it with a bang ('log_in!/1') to receive a json.
+  'url' must be using https.
+  Check the FB docs: https://developers.facebook.com/docs/messenger-platform/account-linking/link-account
+  """
+  def log_in(url), do: %{"type" => "account_link", "url" => url}
+
   ######## PRIVATE FUNCTIONS ########
 
   defp assign_fallback_url(url, :empty), do: url
