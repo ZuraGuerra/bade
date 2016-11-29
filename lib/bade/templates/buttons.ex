@@ -70,6 +70,31 @@ defmodule Bade.Templates.Buttons do
   """
   def share, do: generic("element_share")
 
+  @doc """
+  Generates a buy button template and encodes it to json.
+  You can generate the required fields 'payment_summary' and 'price_list' using
+  'Bade.Templates.Services.Buy.payment_summary/6' and 'Bade.Templates.Services.Buy.price_list/2';
+  read their docs for more details.
+  Check the FB docs: https://developers.facebook.com/docs/messenger-platform/send-api-reference/buy-button
+  """
+  def buy!(payload, payment_summary), do: buy(payload, payment_summary) |> Poison.encode!
+
+  @doc """
+  Generates a buy button template. Use it with a bang ('buy!/2') to receive a json.
+  You can generate the required fields 'payment_summary' and 'price_list' using
+  'Bade.Templates.Services.Buy.payment_summary/6' and 'Bade.Templates.Services.Buy.price_list/2';
+  read their docs for more details.
+  Check the FB docs: https://developers.facebook.com/docs/messenger-platform/send-api-reference/buy-button
+  """
+  def buy(payload, payment_summary) do
+    %{
+      "type" => "payment",
+      "title" => "buy",
+      "payload" => payload,
+      "payment_summary" => payment_summary
+    }
+  end
+
   ######## PRIVATE FUNCTIONS ########
 
   defp assign_fallback_url(url, :empty), do: url
